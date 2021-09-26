@@ -42,7 +42,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Leenset\\Sms\\": "leenset/sms/"
+            "Leenset\\Sms\\": "Leenset/Sms/" 
         },
         "files": ["app/Helpers/SmsVerifyMethod.php"],
         "classmap": [
