@@ -5,13 +5,14 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/services', 'ServiceController@index');
-Route::get('/barbers/search','BarberController@search');
-Route::get('/service/{service}', 'ServiceController@show');
-Route::get('/barbers/{barbers}', 'BarberController@index');
-Route::get('/advertising', 'AdvertisingController@index');
-Route::get('/appointments', 'AppointmentController@index');
+
 Route::group(['middleware' => ['auth:api']], function () {
+    Route::get('/services', 'ServiceController@index');
+    Route::get('/barbers/search', 'BarberController@search');
+    Route::get('/service/{service}', 'ServiceController@show');
+    Route::get('/barbers/{barbers}', 'BarberController@index');
+    Route::get('/advertising', 'AdvertisingController@index');
+    Route::get('/appointments', 'AppointmentController@index');
     Route::get('/user', 'UserController@index');
     Route::post('/user', 'UserController@edit');
     Route::post('/service', 'ServiceController@store');
