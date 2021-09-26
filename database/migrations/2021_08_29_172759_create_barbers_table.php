@@ -16,6 +16,7 @@ class CreateBarbersTable extends Migration
         Schema::create('barbers', function (Blueprint $table) {
             $table->charset = 'utf8mb4';
             $table->id();
+            $table->string('name_shop');
             $table->string('phone');
             $table->bigInteger('user_id')->unsigned();
             $table->text('address');
@@ -25,6 +26,8 @@ class CreateBarbersTable extends Migration
             $table->string('image_hairdressing_degree');
             $table->double('latitude');
             $table->double('longitude');
+            $table->boolean('suggest');
+            $table->boolean('offer');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/services', 'ServiceController@index');
+Route::get('/barbers/search','BarberController@search');
 Route::get('/service/{service}', 'ServiceController@show');
 Route::get('/barbers/{barbers}', 'BarberController@index');
 Route::get('/appointments', 'AppointmentController@index');
