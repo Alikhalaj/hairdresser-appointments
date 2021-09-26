@@ -11,13 +11,15 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use SanjabVerify\Support\Facades\Verify;
 
+use App\Http\Resources\User as UserResources;
+
 class UserController extends Controller
 {
 
     public function index()
     {
         $user = Auth::user();
-        return response($user);
+        return new UserResources($user);
     }
 
     public function loginRegister(Request $request)
@@ -93,6 +95,7 @@ class UserController extends Controller
         if ($request->file('image')) {
             //store file into document folder
             $file = $request->file('image')->store('public/UserImage');
+            // return $file;
             var_dump($request->all());
             //store your file into database
             $user->image = $file;
