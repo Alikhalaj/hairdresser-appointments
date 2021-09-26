@@ -25,15 +25,33 @@ class BarberController extends Controller
             return response($barbers);
         }
     }
-    public function store(Request $request)
+    public function edit(Request $request)
     {
         $attribuites = request()->validate([
+            'name_shop'=>'required',
             'phone' => 'required',
             'address' => 'required',
             'time_work_start' => 'required',
             'time_work_end' => 'required',
-            'image_business_license' => 'required',
-            'image_hairdressing_degree' => 'required',
+            'image_business_license' => 'required|mimes:png|max:2048',
+            'image_hairdressing_degree' => 'required|mimes:png|max:2048',
+            'latitude' => 'required',
+            'longitude' => 'required'
+        ]);
+        $barber = Auth::user()->barber()->update($attribuites);
+        // $barber->assignRole('Barber');
+        return response($barber);
+    }
+    public function store(Request $request)
+    {
+        $attribuites = request()->validate([
+            'name_shop'=>'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'time_work_start' => 'required',
+            'time_work_end' => 'required',
+            'image_business_license' => 'required|mimes:png|max:2048',
+            'image_hairdressing_degree' => 'required|mimes:png|max:2048',
             'latitude' => 'required',
             'longitude' => 'required'
         ]);
@@ -44,7 +62,7 @@ class BarberController extends Controller
     public function show(Barber $barber)
     {
         if (request()->wantsJson()) {
-            return response($barber);
+            return response( Auth::user()->barber);
         }
         return view('service.show', compact('service'));
     }

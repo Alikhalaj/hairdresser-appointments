@@ -6,12 +6,20 @@ use App\Helpers\SmsVerifyMethod;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Carbon\Carbon;
-use App\Http\Requests\User\PhoneRequest;
+// use App\Http\Requests\User\PhoneRequest;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use SanjabVerify\Support\Facades\Verify;
 
 class UserController extends Controller
 {
+
+    public function index()
+    {
+        $user = Auth::user();
+        return response($user);
+    }
+
     public function loginRegister(Request $request)
     {
         $result = Verify::verify($request->input('phone'), $request->input('code'));
@@ -66,9 +74,36 @@ class UserController extends Controller
     }
 
     // update and complate profile
-    private function update(Request $request)
+    public function edit(Request $request)
     {
-        // $User = auth()->user()->create($request);
+        $user = Auth::user();
+        $user->last_name = $request->input('last_name');
+        $user->first_name = $request->input('first_name');
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'image' => 'mimes:png|max:2048',
+            ]
+        );
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+
+
+        if ($request->file('image')) {
+            //store file into document folder
+            $file = $request->file('image')->store('public/UserImage');
+            var_dump($request->all());
+            //store your file into database
+            $user->image = $file;
+            $user->save();
+
+            return response()->json([
+                "success" => true,
+                "message" => "File successfully uploaded",
+                "file" => $file
+            ]);
+        }
     }
 
     public function send(Request $request)
