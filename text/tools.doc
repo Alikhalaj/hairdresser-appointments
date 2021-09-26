@@ -1,0 +1,105 @@
+User
+    *login
+    *Register
+--------------------------------------------------------
+Barber
+    *completed profile
+    *    phone
+    *    address
+    *    time open and close
+    *    image business license
+    *    image hairdressing degree
+    *    social media
+    free time تابع لغو رزو
+        id
+        deleate
+    *index
+    *list Barber
+    *show profile
+    Barber Trend
+--------------------------------------------------------
+Appointment
+    add appointment
+        time
+        price
+        id-user
+        id-barber
+        prepayment
+        list service
+        geolocation
+        score
+    add list service مربوط به قسمت اضافه کردن باید ترنزاکشن باشد
+        id-service
+        id-appointment
+    done
+        id
+        done
+--------------------------------------------------------
+Service
+    add service
+    *    time
+    *    name
+    *    price
+    index service
+    *    list service
+--------------------------------------------------------
+Event
+    after add appointment and done send link survey
+    if negative score > 15 block Barber
+    if positive score last 10 Barber professional
+--------------------------------------------------------
+Commications
+    send // soket
+--------------------------------------------------------
+Video service
+    add
+    manage
+    comment
+    view
+--------------------------------------------------------
+Comments
+    vedio-id 
+    Barber
+    post
+    id_comment
+    id_user
+    like    // soket
+--------------------------------------------------------
+Post Service
+    image
+    title
+    description
+    tags
+    comment
+    view
+    like
+    +create
+    +update
+    +deleate
+    +show
+        comment
+--------------------------------------------------------
+Tags
+    id-Post
+    name نام تگهایی که زیر پست مگذارد
+--------------------------------------------------------
+Record Service
+    id-tags
+    number
+    id-barber
+    number
+    id-Video محاسبه امتیاز بر اساس ویو و تعداد تکرار تگهایی که دارد و تعداد کامنت هاو فالورها
+--------------------------------------------------------
+like_Post
+like_video
+like_barber
+like_comment
+--------------------------------------------------------
+view
+    id_post
+    ip_viewer or id_login
+
+    ---- = 10  
+    5000 = 100
+--------------------------------------------------------
+add offer image for model
