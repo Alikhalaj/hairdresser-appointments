@@ -19,7 +19,7 @@ class BarberController extends Controller
         } elseif ($barber == 'offer') {
             $barbers = Barber::where('offer', '1')->get();
         }
-        return  response()->json(BarberResources::collection($barbers));
+        return BarberResources::collection($barbers);
     }
     public function edit(Request $request)
     {
@@ -78,7 +78,7 @@ class BarberController extends Controller
     }
     public function profile()
     {
-        return response()->json(BarberResources::collection(Auth::user()->barber));
+        return BarberResources::collection(Auth::user()->barber);
     }
 
     public function show(Barber $barber)
@@ -92,7 +92,7 @@ class BarberController extends Controller
             $attribuites = request()->validate(['phone' => 'required']);
             $attribuites = request()->input("phone");
             $barber = Barber::where('phone', 'LIKE', "%{$attribuites}%")->orWhere('name_shop', 'LIKE', "%{$attribuites}%")->get();
-            return response()->json(BarberResources::collection($barber));
+            return BarberResources::collection($barber);
         } catch (Exception $e) {
             return response($e->message);
         }
