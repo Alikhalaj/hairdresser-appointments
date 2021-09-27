@@ -17,8 +17,8 @@ class SmsVerifyMethod implements VerifyMethod
         $request = new Request;
         date_default_timezone_set("Asia/Tehran");
         // echo implode($MobileNumber); 
-        // $sms = Sms::make();
-        // $verificationCode = $sms->send($code, $receiver);
+        $sms = Sms::make();
+        $verificationCode = $sms->send($code, $receiver);
         return $code;
     }
 }
