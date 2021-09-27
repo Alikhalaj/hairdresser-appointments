@@ -8,6 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Barber::class, function (Faker $faker) {
     return [
+        'name_shop'=>$faker->name(),
         'phone' =>$faker->phoneNumber(),
         'address'=>$faker->address(),
         'time_work_start'=>Carbon::now('Asia/Tehran')->format('H:i:s'),
