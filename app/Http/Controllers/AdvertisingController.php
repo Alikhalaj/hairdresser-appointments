@@ -25,7 +25,6 @@ class AdvertisingController extends Controller
      */
     public function create(Request $request)
     {
-        return "Sdf";
         $attribuites = request()->validate([
             'name' => 'required',
             'image_address' => 'required|mimes:png,jpg',
