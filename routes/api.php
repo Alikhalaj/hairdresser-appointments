@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/user', 'UserController@index');
     Route::post('/user', 'UserController@edit');
     // appointment
-    Route::get('/appointments', 'AppointmentController@index');
+    Route::get('/appointments/barber/{barber}', 'AppointmentController@index');
     Route::post('/appointment', 'AppointmentController@store');
     Route::post('/appointment/lastTime', 'AppointmentController@lastTime');
     Route::get('/appointment/{appointment}', 'AppointmentController@show');

@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Faker\Generator as Faker;
 
 $factory->define(Appointment::class, function (Faker $faker) {
-    $start = Carbon::create($this->faker->dateTimeBetween('-1 years', now(), 'Asia/Tehran'));
+    $start = Carbon::create($this->faker->dateTimeBetween(now(), '+1 week', 'Asia/Tehran'));
     $end = Carbon::create($start)->addMinutes(20);
     return [
         'user_id' => User::all()->random()->id,

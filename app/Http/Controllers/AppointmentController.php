@@ -8,17 +8,13 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Resources\AppointmentResource;
 class AppointmentController extends Controller
 {
-    public function index()
+    public function index($barber)
     {
-        $appointments = Appointment::all();
-        if (request()->wantsJson()) {
-            var_dump(request()->wantsJson());
-            return response($appointments);
-        }
-        return view('appointments.index', compact('appointments'));
+        $appointments = Barber::find($barber)->appointments;
+        return AppointmentResource::collection($appointments);
     }
     public function store()
     {

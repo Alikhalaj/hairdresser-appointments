@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\User;
 
 class Barber extends JsonResource
 {
@@ -25,6 +26,7 @@ class Barber extends JsonResource
             "image_hairdressing_degree"=> Storage::url($this->image_hairdressing_degree),
             "latitude"=> $this->latitude,
             "longitude"=> $this->longitude,
+            "user"=>new User($this->user)
         ];
     }
 }
