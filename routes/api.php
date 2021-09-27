@@ -17,7 +17,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/barbers/{barbers}', 'BarberController@index');
     Route::get('/barber/{barber}', 'BarberController@show');
     Route::get('/barber', 'BarberController@profile');
-    Route::get('/search', 'BarberController@search');
+    Route::post('/search', 'BarberController@search');
     // advertising
     Route::get('/advertising', 'AdvertisingController@index');
     // user
