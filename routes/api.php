@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/search', 'BarberController@search');
     // advertising
     Route::get('/advertising', 'AdvertisingController@index');
+    Route::post('/advertising', 'AdvertisingController@create');
     // user
     Route::get('/user', 'UserController@index');
     Route::post('/user', 'UserController@edit');

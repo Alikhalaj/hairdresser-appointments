@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Advertising;
 use Illuminate\Http\Request;
+use App\Http\Resources\Advertising as AdvertisingResources;
 
 class AdvertisingController extends Controller
 {
@@ -14,7 +15,7 @@ class AdvertisingController extends Controller
      */
     public function index()
     {
-        return response(Advertising::all());
+        return AdvertisingResources::collection(Advertising::all());
     }
 
     /**
@@ -22,9 +23,19 @@ class AdvertisingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $attribuites = request()->validate([
+            'name' => 'required',
+            'image_address' => 'required|mimes:png,jpg',
+        ]);
+        if ($request->file('image_address')) {
+            $image_address = $request->file('image_address')->store('public/Advertising');
+            $attribuites['image_address'] = $image_address;
+
+            $advertising = Advertising::create($attribuites);
+            return response()->json(new AdvertisingResources($advertising), 200);
+        }
     }
 
     /**
