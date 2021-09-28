@@ -17,7 +17,7 @@ class AppointmentTest extends TestCase
     public function a_useer_set_appointment()
     {
         $this->actingAs(factory('App\User')->create(),'api');
-        $start = Carbon::create($this->faker->dateTimeBetween('-1 years', now(), 'Asia/Tehran'))->minute(0)->second(0);
+        $start = Carbon::create($this->faker->dateTimeBetween(now(),'+1 week', 'Asia/Tehran'))->minute(0)->second(0);
         $service = $this->faker->numberBetween(2,6) * 5;
         $price = $this->faker->numberBetween(1, 10) * 10000;
         $barber =factory('App\Barber')->create();
@@ -31,11 +31,5 @@ class AppointmentTest extends TestCase
         $response = $this->postJson('api/appointment', $detail);
         // $response->assertJson($detail);
         $this->assertDatabaseHas('appointments', ['barber_id' => $barber->id]);
-        $response = $this->getJson('api/appointments');
-        $response
-            ->assertStatus(200)
-            ->assertSee($detail['barber_id'])
-            ->assertSee($detail['prepayment'])
-            ->assertSee($detail['price']);
     }
 }

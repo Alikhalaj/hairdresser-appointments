@@ -17,6 +17,8 @@ $factory->define(Barber::class, function (Faker $faker) {
         'image_hairdressing_degree'=>$faker->image(),
         'latitude'=>$faker->latitude(25,39),
         'longitude'=>$faker->longitude(44,63),
+        'suggest'=>'0',
+        'offer'=>'0',
         'user_id'=>function(){
             return factory(App\User::class)->create()->id;
         }

@@ -23,6 +23,8 @@ class BarberTest extends TestCase
             'image_hairdressing_degree'=>"C:\Users\AKH\AppData\Local\Temp\481e787bb24b3b0620cadb7453186433.png",
             'latitude'=>$this->faker->latitude(25,39),
             'longitude'=>$this->faker->longitude(44,63),
+            'suggest'=>0,
+            'offer'=>0,
         ];
         $this->postJson('api/barber', $attribuites);
         $this->assertDatabaseHas('barbers', $attribuites);
