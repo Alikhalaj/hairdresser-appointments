@@ -7,9 +7,13 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\Barber as BarberResources;
-
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+// 
 class BarberController extends Controller
 {
+    // 'image_business_license' => 'required|mimes:png,jpg|max:2048',
+    // 'image_hairdressing_degree' => 'required|mimes:png,jpg|max:2048',
     public function index($barber)
     {
         if ($barber == 'index') {
@@ -54,16 +58,20 @@ class BarberController extends Controller
     }
     public function store(Request $request)
     {
+        $role = Role::where('name', 'barber')->first();
+        if (!isset($role)) {
+            Role::create(['name' => 'barber']);
+        }
         $attribuites = request()->validate([
             'name_shop' => 'required',
             'phone' => 'required|unique:barbers',
             'address' => 'required',
             'time_work_start' => 'required',
             'time_work_end' => 'required',
-            'image_business_license' => 'required|mimes:png|max:2048',
-            'image_hairdressing_degree' => 'required|mimes:png|max:2048',
             'latitude' => 'required',
-            'longitude' => 'required'
+            'longitude' => 'required',
+            'suggest' => 'required',
+            'offer' => 'required',
         ]);
         if ($request->file('image_business_license') && $request->file('image_hairdressing_degree')) {
             $image_business_license = $request->file('image_business_license')->store('public/Barber/License');

@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use SanjabVerify\Support\Facades\Verify;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 use App\Http\Resources\User as UserResources;
 
@@ -24,10 +26,13 @@ class UserController extends Controller
 
     public function loginRegister(Request $request)
     {
+        $role = Role::where('name', 'barber')->first();
+        if (!isset($role)) {
+            Role::create(['name' => 'barber']);
+        }
         $result = Verify::verify($request->input('phone'), $request->input('code'));
         if ($result['success'] == true) {
             if (User::where(['phone' => $request->input('phone')])->first() != null) {
-                $result = Verify::verify($request->input('phone'), $request->input('code'));
                 return $this->newSecssion($request);
             }
             $user = new User([
@@ -46,7 +51,7 @@ class UserController extends Controller
         // 
     }
     //create session for user
-    public function newSecssion($request, $user = null)
+    private function newSecssion($request, $user = null)
     {
         if ($user == null) {
             $user = User::where(['phone' => $request->input('phone')])->first();

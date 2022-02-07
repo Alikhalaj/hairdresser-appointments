@@ -46,6 +46,12 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'crm'=>[
+            'driver' => 'passport',
+            'provider' => 'crms',
+            'hash' => false,
+        ]
     ],
 
     /*
@@ -70,7 +76,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-
+        'crms' =>[
+            'driver' => 'eloquent',
+            'model' => App\Crm::class,
+        ]
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -95,6 +104,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'crms' => [
+            'provider' => 'crms',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

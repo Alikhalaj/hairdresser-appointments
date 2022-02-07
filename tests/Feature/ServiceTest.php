@@ -59,6 +59,7 @@ class ServiceTest extends TestCase
     public function a_barber_can_view_a_service()
     {
         $this->withoutExceptionHandling();
+        $this->actingAs(factory('App\User')->create(),'api');
         $service = factory('App\Service')->create();
         $this->get('service/' . $service->id)->assertSee($service->name)->assertSee($service->time)->assertSee($service->price);
         $this->get('api/service/' . $service->id)->assertSee($service->name)->assertSee($service->time)->assertSee($service->price);

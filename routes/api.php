@@ -30,7 +30,5 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/appointment/lastTime', 'AppointmentController@lastTime');
     Route::get('/appointment/{appointment}', 'AppointmentController@show');
 });
-Route::group(['middleware' => ['sessions']], function () {
-    Route::post('/sendOneTimeCode', 'UserController@send');
-    Route::post('/login', 'UserController@loginRegister');
-});
+Route::post('/sendOneTimeCode', 'UserController@send');
+Route::post('/login', 'UserController@loginRegister');

@@ -4,11 +4,13 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Database\Eloquent\Collection;
 
 class BarberTest extends TestCase
 {
-    use RefreshDatabase;
+    use WithFaker,RefreshDatabase;
     /**
      * @test
      */

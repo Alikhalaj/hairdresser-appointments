@@ -15,7 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
-
+    protected $namespace2 = 'App\Http\Controllers\Crm';
     /**
      * The path to the "home" route for your application.
      *
@@ -45,6 +45,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+
+        $this->mapCrmRoutes();
 
         //
     }
@@ -76,5 +78,13 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapCrmRoutes()
+    {
+        Route::prefix('crm')
+        ->middleware(['cors', 'json.response'])
+        ->namespace($this->namespace2)
+        ->group(base_path('routes/crm.php'));
     }
 }
